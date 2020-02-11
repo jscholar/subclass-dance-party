@@ -1,6 +1,6 @@
 $(document).ready(function() {
   window.dancers = [];
-
+  window.surfaceDogs = [];
   $('.addDancerButton').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
      * buttons on dancefloor.html. You should only need to make one small change to it.
@@ -27,7 +27,10 @@ $(document).ready(function() {
       $("body").width() * Math.random(),
       Math.random() * 1000
     );
-
+    // If we're making SurfaceDog. Push into surfaceDog array
+    if (dancerMakerFunctionName === 'SurfaceDog') {
+      window.surfaceDogs.push(dancer);
+    }
     window.dancers.push(dancer);
 
     $('body').append(dancer.$node);
