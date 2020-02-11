@@ -28,3 +28,8 @@ body, a:link, a:visited, a:active{
   position:absolute;
   transition: 2000ms;
 }
+.surface-dog {
+  border: none;
+  width: 60px;
+  background-color: rgba(0, 0, 0, 0);
+}
