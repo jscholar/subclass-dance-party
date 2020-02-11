@@ -1,10 +1,11 @@
 var SurfaceDog = function(top, left, timeBetweenSteps) {
   this.distance = ($('body').width() / 500) * (1 + (Math.random() - 1));
   this.distance = Math.random() > 0.5 ? this.distance : -this.distance;
+  this.timeBetweenSteps = 20;
   Dancer.call(this, top, left, timeBetweenSteps);
   this.top = ($('body').height() / 4) + Math.random() * ($('body').height() / 10);
-  this.timeBetweenSteps = 20;
   this.setPosition();
+  this.$node = $('<img class="surface-dog dancer" src="assets/surfaceDogPic.png"/>');
   this.$node.css({
     transition: 'none'
     // transition: timeBetweenSteps + 'ms',
@@ -48,8 +49,4 @@ SurfaceDog.prototype.step = function() {
       };
     }
   }
-};
-
-SurfaceDog.prototype.lineUp = function() {
-
 };
