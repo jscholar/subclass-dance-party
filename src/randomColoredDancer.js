@@ -1,5 +1,5 @@
 var randomColoredDancer = function (top, left, timeBetweenSteps) {
-  BlinkyDancer.call(this, top, left, timeBetweenSteps);
+  Dancer.call(this, top, left, timeBetweenSteps);
 
   let red = Math.random() * 255;
   let green = Math.random() * 255;
@@ -10,6 +10,6 @@ var randomColoredDancer = function (top, left, timeBetweenSteps) {
   this.$node.css(this.colorSettings);
 };
 
-randomColoredDancer.prototype = Object.create(BlinkyDancer.prototype);
+randomColoredDancer.prototype = Object.create(Dancer.prototype);
 
 randomColoredDancer.prototype.constructor = randomColoredDancer;
