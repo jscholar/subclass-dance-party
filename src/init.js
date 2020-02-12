@@ -1,6 +1,9 @@
 $(document).ready(function() {
   window.dancers = [];
   window.surfaceDogs = [];
+  window.mouseHover = false;
+  window.mouseX = $('body').width() / 2;
+  window.mouseY = $('body').height() / 2;
   $('.addDancerButton').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
      * buttons on dancefloor.html. You should only need to make one small change to it.
@@ -40,6 +43,20 @@ $(document).ready(function() {
     for (var i = 0; i < window.dancers.length; i++) {
       window.dancers[i].lineUp(i, window.dancers.length);
     }
+  });
+
+  $('body').mouseover(function() {
+    window.mouseHover = true;
+  });
+
+  $('body').mouseout(function() {
+    window.mouseHover = false;
+  });
+
+  $('body').mousemove(function(event) {
+    // Remember mouse position
+    window.mouseX = event.pageX;
+    window.mouseY = event.pageY;
   });
 });
 
