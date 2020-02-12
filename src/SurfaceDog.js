@@ -1,11 +1,12 @@
 var SurfaceDog = function(top, left, timeBetweenSteps) {
   this.distance = ($('body').width() / 500) * (1 + (Math.random() - 1));
   this.distance = Math.random() > 0.5 ? this.distance : -this.distance;
-  this.timeBetweenSteps = 20;
   Dancer.call(this, top, left, timeBetweenSteps);
+  this.timeBetweenSteps = 20;
   this.top = ($('body').height() / 4) + Math.random() * ($('body').height() / 10);
   this.setPosition();
-  this.$node = $('<img class="surface-dog dancer" src="assets/surfaceDogPic.png"/>');
+  this.$node = $('<img class="dog dancer" src="assets/surfaceDogPic.png"/>');
+  this.distance < 0 ? this.flip() : null;
   this.$node.css({
     transition: 'none'
     // transition: timeBetweenSteps + 'ms',
@@ -15,7 +16,6 @@ var SurfaceDog = function(top, left, timeBetweenSteps) {
 
 SurfaceDog.prototype = Object.create(Dancer.prototype);
 SurfaceDog.prototype.constructor = SurfaceDog;
-
 SurfaceDog.prototype.step = function() {
   // Call Dancer's step
   Dancer.prototype.step.call(this);
@@ -25,8 +25,9 @@ SurfaceDog.prototype.step = function() {
     this.left + this.distance >= $('body').width() ||
     this.left + this.distance <= 0
   ) {
-    // Change directions
+    // Change directions and flip dog img.
     this.distance *= -1;
+    this.flip();
   }
 
   // Iterate through all surface dogs
@@ -40,11 +41,13 @@ SurfaceDog.prototype.step = function() {
     if (this.left <= otherDog.left) {
       if (this.left + this.distance >= otherDog.left) {
         this.distance *= -1;
+        this.flip();
         break;
       };
     } else {
       if (this.left + this.distance <= otherDog.left) {
         this.distance *= -1;
+        this.flip();
         break;
       };
     }
