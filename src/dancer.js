@@ -34,3 +34,7 @@ Dancer.prototype.lineUp = function(index, length) {
   // Set the new position
   this.setPosition();
 };
+
+Dancer.prototype.flip = function() {
+  this.$node.toggleClass('flip-horizontally');
+};
