@@ -1,55 +1,62 @@
-var SurfaceDog = function(top, left, timeBetweenSteps) {
-  this.distance = ($('body').width() / 500) * (1 + (Math.random() - 1));
-  this.distance = Math.random() > 0.5 ? this.distance : -this.distance;
-  Dancer.call(this, top, left, timeBetweenSteps);
-  this.timeBetweenSteps = 20;
-  this.top = ($('body').height() / 4) + Math.random() * ($('body').height() / 10);
-  this.setPosition();
+var SurfaceDog = function(top, left) {
+  debugger;
+  top = ($('body').height() / 3.75) + Math.random() * ($('body').height() / 10);
+  left = Math.abs(left - this.length);
+  let vx = 1.5 + (Math.random() - 1);
+
+  SurfaceDog.prototype.parent.constructor.call(this, top, left, null, [vx, 0]);
   this.$node = $('<img class="dog dancer" src="assets/surfaceDogPic.png"/>');
-  this.distance < 0 ? this.flip() : null;
-  this.$node.css({
-    transition: 'none'
-    // transition: timeBetweenSteps + 'ms',
-    //'transition-timing-function': 'ease-in'
-  });
+  if (Math.random() < 0.5) {
+    this.turnAround();
+  }
+  this.setPosition();
 };
 
-SurfaceDog.prototype = Object.create(Dancer.prototype);
+SurfaceDog.prototype = Object.create(MovingDancer.prototype);
 SurfaceDog.prototype.constructor = SurfaceDog;
+SurfaceDog.prototype.parent = MovingDancer.prototype;
+SurfaceDog.prototype.length = 60;
+
 SurfaceDog.prototype.step = function() {
-  // Call Dancer's step
-  Dancer.prototype.step.call(this);
+  this.avoidWall();
 
-  // If dog is about to hit left or right wall
+  window.surfaceDogs.forEach(this.avoidObject.bind(this));
+
+  SurfaceDog.prototype.parent.step.call(this);
+};
+
+SurfaceDog.prototype.turnAround = function() {
+  this.velocity.scale(-1);
+  this.flip();
+};
+
+SurfaceDog.prototype.avoidWall = function() {
   if (
-    this.left + this.distance >= $('body').width() ||
-    this.left + this.distance <= 0
+    // Avoid wall with small buffer
+    this.position.x + 5 * this.velocity.x >= $('body').width() - this.length ||
+    this.position.x + 5 * this.velocity.x <= 0
   ) {
-    // Change directions and flip dog img.
-    this.distance *= -1;
-    this.flip();
+    this.turnAround();
+  }
+};
+
+
+SurfaceDog.prototype.avoidObject = function(object) {
+  if (object === this || Math.abs(this.position.y - object.position.y) > 30) {
+    return;
+  }
+  // If going to collide with object
+  if (
+    // Collide from the left;
+    (this.position.x + this.length) + this.velocity.x > object.position.x &&
+    (this.position.x + this.length) < object.position.x
+    ||
+    // Collide from the right
+    this.position.x + this.velocity.x < object.position.x + object.length &&
+    this.position.x > object.position.x + object.length
+  ) {
+    // Don't
+    this.turnAround();
   }
 
-  // Iterate through all surface dogs
-  this.left += this.distance;
-  this.setPosition();
-  for (var i = 0; i < window.surfaceDogs.length; i++) {
-    if (window.surfaceDogs[i] === this) {
-      continue;
-    }
-    var otherDog = window.surfaceDogs[i];
-    if (this.left <= otherDog.left) {
-      if (this.left + this.distance >= otherDog.left) {
-        this.distance *= -1;
-        this.flip();
-        break;
-      };
-    } else {
-      if (this.left + this.distance <= otherDog.left) {
-        this.distance *= -1;
-        this.flip();
-        break;
-      };
-    }
-  }
 };
