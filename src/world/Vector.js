@@ -16,7 +16,7 @@ Vector.prototype.scale = function (scalar) {
 /**
  * Return a normalized Vector object
  */
-Vector.prototype.normalize = function() {
+Vector.prototype.normalized = function() {
   return new Vector(
     this.x / this.getMagnitude(), this.y / this.getMagnitude()
   );
