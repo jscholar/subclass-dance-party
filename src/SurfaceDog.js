@@ -1,5 +1,4 @@
 var SurfaceDog = function(top, left) {
-  debugger;
   top = ($('body').height() / 3.75) + Math.random() * ($('body').height() / 10);
   left = Math.abs(left - this.length);
   let vx = 1.5 + (Math.random() - 1);
