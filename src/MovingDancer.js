@@ -15,3 +15,7 @@ MovingDancer.prototype.step = function() {
 
   this.setPosition();
 };
+
+MovingDancer.prototype.accelerate = function(force) {
+  this.velocity.add(force);
+};
