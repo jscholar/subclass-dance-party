@@ -1,5 +1,5 @@
-var squareDancer = function (top, left, timeBetweenSteps) {
-  randomColoredDancer.call(this, top, left, timeBetweenSteps);
+var SquareDancer = function (top, left, timeBetweenSteps) {
+  RandomColoredDancer.call(this, top, left, timeBetweenSteps);
   this.direction = 'right';
   this.$node.css({
     transition: timeBetweenSteps + 'ms',
@@ -7,7 +7,7 @@ var squareDancer = function (top, left, timeBetweenSteps) {
   });
 };
 
-squareDancer.prototype = Object.create(randomColoredDancer.prototype);
+squareDancer.prototype = Object.create(RandomColoredDancer.prototype);
 
 squareDancer.prototype.constructor = squareDancer;
 
