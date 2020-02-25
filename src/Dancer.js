@@ -26,8 +26,8 @@ Dancer.prototype.setPosition = function () {
 };
 
 Dancer.prototype.lineUp = function(index, length) {
-  this.position.x = $("body").height() / 2;
-  this.position.y = ((index + 1) * $("body").width() / (length + 1));
+  this.position.x = $('body').height() / 2;
+  this.position.y = ((index + 1) * $('body').width() / (length + 1));
 
   // Set the new position
   this.setPosition();

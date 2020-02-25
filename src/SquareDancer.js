@@ -17,7 +17,7 @@ squareDancer.prototype.step = function () {
   // Check which direction
   //   Go that direction and then change directions
 
-  var distance = $("body").height() / 8; // Move down
+  var distance = $('body').height() / 8; // Move down
   // Dance like a square
 
   switch (this.direction) {
