@@ -34,10 +34,27 @@ $(document).ready(function() {
     if (dancerMakerFunctionName === 'SurfaceDog') {
       window.surfaceDogs.push(dancer);
     }
+
     window.dancers.push(dancer);
 
     $('body').append(dancer.$node);
   });
+
+  $('.addManyScuba').on('click', function(event) {
+    for (let i = 0; i < 100; i++) {
+      var dancer = new window.ScubaDog(
+        $('body').height() * Math.random(),
+        $('body').width() * Math.random(),
+        Math.random() * 1000
+      );
+
+      window.dancers.push(dancer);
+      $('body').append(dancer.$node);
+
+    }
+
+  });
+
 
   $('.lineUpDancersButton').on('click', function(event) {
     for (var i = 0; i < window.dancers.length; i++) {

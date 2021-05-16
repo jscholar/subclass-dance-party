@@ -11,7 +11,6 @@ ScubaDog.prototype.parent = MovingDancer.prototype;
 
 ScubaDog.prototype.step = function() {
   ScubaDog.prototype.parent.step.call(this);
-  debugger;
   var force = new Vector(0, 0);
 
   if (this.position.y > $('body').height() / 4) {

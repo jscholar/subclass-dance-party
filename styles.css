@@ -35,3 +35,7 @@ body, a:link, a:visited, a:active{
 .flip-horizontally {
   transform: scaleX(-1);
 }
+.addManyScuba {
+  padding:5px 12px;
+  float: right;
+}
